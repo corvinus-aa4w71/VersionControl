@@ -33,6 +33,7 @@ namespace UserMaintenance
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.lblFullName = new System.Windows.Forms.Label();
+            this.btnToFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listUsers
@@ -45,7 +46,7 @@ namespace UserMaintenance
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(352, 117);
+            this.btnAdd.Location = new System.Drawing.Point(352, 71);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 1;
@@ -69,11 +70,22 @@ namespace UserMaintenance
             this.lblFullName.TabIndex = 4;
             this.lblFullName.Text = "label1";
             // 
+            // btnToFile
+            // 
+            this.btnToFile.Location = new System.Drawing.Point(352, 128);
+            this.btnToFile.Name = "btnToFile";
+            this.btnToFile.Size = new System.Drawing.Size(75, 23);
+            this.btnToFile.TabIndex = 5;
+            this.btnToFile.Text = "button1";
+            this.btnToFile.UseVisualStyleBackColor = true;
+            this.btnToFile.Click += new System.EventHandler(this.btnToFile_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnToFile);
             this.Controls.Add(this.lblFullName);
             this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.btnAdd);
@@ -91,6 +103,7 @@ namespace UserMaintenance
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.Label lblFullName;
+        private System.Windows.Forms.Button btnToFile;
     }
 }
 
