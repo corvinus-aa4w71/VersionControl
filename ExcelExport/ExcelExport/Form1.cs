@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using System;
+using System.Drawing;
 
 namespace ExcelExport
 {
@@ -15,12 +16,13 @@ namespace ExcelExport
         Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
         int _million = (int)Math.Pow(10, 6);
+        string[] headers;
         public Form1()
         {
             InitializeComponent();
             LoadData();
             dataGridView1.DataSource = lakasok;
-            
+            CreateExcell();
             
 
         }
@@ -43,8 +45,8 @@ namespace ExcelExport
                 xlSheet = xlWB.ActiveSheet;
 
                 // Tábla létrehozása
-                //CreateTable(); // Ennek megírása a következő feladatrészben következik
-
+                CreateTable();
+                FormatTable();
                 // Control átadása a felhasználónak
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -63,7 +65,7 @@ namespace ExcelExport
         }
         public void CreateTable()
         {
-            string[] headers = new string[] {
+             headers = new string[] {
              "Kód",
              "Eladó",
              "Oldal",
@@ -124,6 +126,31 @@ namespace ExcelExport
             ExcelCoordinate += x.ToString();
 
             return ExcelCoordinate;
+        }
+        private void FormatTable()
+        {
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            int lastRowID = xlSheet.UsedRange.Rows.Count;
+            int lastColumnID = xlSheet.UsedRange.Columns.Count;
+
+            Excel.Range completeTableRange = xlSheet.get_Range(GetCell(1, 1), GetCell(lastRowID, headers.Length));
+            completeTableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range FirstRowRange = xlSheet.get_Range(GetCell(2, 1), GetCell(lastRowID, 1));
+            FirstRowRange.Font.Bold = true;
+            FirstRowRange.Interior.Color = Color.LightYellow;
+
+            Excel.Range LastRowRange = xlSheet.get_Range(GetCell(2, lastColumnID), GetCell(lastRowID, lastColumnID));
+            LastRowRange.Interior.Color = Color.LightGreen;
+            LastRowRange.NumberFormat = "0.00";
         }
 
     }
