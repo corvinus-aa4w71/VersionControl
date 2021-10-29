@@ -18,14 +18,27 @@ namespace SOAP
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
         public Form1()
         {
             InitializeComponent();
+            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            string result = response.GetCurrenciesResult;
+            XmlDocument vxml = new XmlDocument();
+            vxml.LoadXml(result);
+            foreach (XmlElement item in vxml.DocumentElement.FirstChild.ChildNodes)
+            {
+                Currencies.Add(item.InnerText);
+            }
+            comboBox1.DataSource = Currencies;
             RefreshData();
         }
 
         private void RefreshData()
         {
+            if (comboBox1.SelectedItem == null) return;
             Rates.Clear();
             string xmlstring = Consume();
             LoadXml(xmlstring);
@@ -70,6 +83,7 @@ namespace SOAP
                 RateData rd = new RateData();
                 rd.Date = DateTime.Parse(item.GetAttribute("date"));
                 XmlElement child = (XmlElement)item.FirstChild;
+                if (child == null) continue;
                 rd.Currency = child.GetAttribute("curr");
                 rd.Value = decimal.Parse(child.InnerText);
                 int unit = int.Parse(child.GetAttribute("unit"));
@@ -80,6 +94,11 @@ namespace SOAP
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void filterChanged(object sender, EventArgs e)
         {
             RefreshData();
         }
