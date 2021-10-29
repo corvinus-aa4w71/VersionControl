@@ -21,8 +21,14 @@ namespace SOAP
         public Form1()
         {
             InitializeComponent();
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            Rates.Clear();
             string xmlstring = Consume();
-            LoadXML(xmlstring);
+            LoadXml(xmlstring);
             dataGridView1.DataSource = Rates;
             Charting();
         }
@@ -47,18 +53,18 @@ namespace SOAP
         {
             MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
             GetExchangeRatesRequestBody request = new GetExchangeRatesRequestBody();
-            request.currencyNames = "EUR";
-            request.startDate = "2020-01-01";
-            request.endDate = "2020-06-30";
+            request.currencyNames = comboBox1.SelectedItem.ToString(); //"EUR";
+            request.startDate = dateTimePicker1.Value.ToString("yyyy-MM-dd"); //"2020-01-01";
+            request.endDate = dateTimePicker2.Value.ToString("yyyy-MM-dd"); //"2020-06-30";
             var response = mnbService.GetExchangeRates(request);
             string result = response.GetExchangeRatesResult;
             return result;
         }
 
-        void LoadXML(string input)
+        void LoadXml(string input)
         {
             XmlDocument xml = new XmlDocument();
-            LoadXML(input);
+            xml.LoadXml(input);
             foreach (XmlElement item in xml.DocumentElement)
             {
                 RateData rd = new RateData();
@@ -71,6 +77,11 @@ namespace SOAP
                 Rates.Add(rd);
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
