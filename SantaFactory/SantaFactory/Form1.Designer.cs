@@ -42,7 +42,7 @@ namespace SantaFactory
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.Location = new System.Drawing.Point(0, 60);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(756, 346);
+            this.mainPanel.Size = new System.Drawing.Size(802, 346);
             this.mainPanel.TabIndex = 0;
             // 
             // createTimer
