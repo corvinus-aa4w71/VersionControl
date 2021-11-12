@@ -37,6 +37,9 @@ namespace SantaFactory
             this.buttonCar = new System.Windows.Forms.Button();
             this.lblNext = new System.Windows.Forms.Label();
             this.btnColor = new System.Windows.Forms.Button();
+            this.btnPresent = new System.Windows.Forms.Button();
+            this.btnBox = new System.Windows.Forms.Button();
+            this.btnRibbon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -84,7 +87,7 @@ namespace SantaFactory
             // lblNext
             // 
             this.lblNext.AutoSize = true;
-            this.lblNext.Location = new System.Drawing.Point(406, 41);
+            this.lblNext.Location = new System.Drawing.Point(537, 38);
             this.lblNext.Name = "lblNext";
             this.lblNext.Size = new System.Drawing.Size(70, 13);
             this.lblNext.TabIndex = 3;
@@ -100,11 +103,44 @@ namespace SantaFactory
             this.btnColor.UseVisualStyleBackColor = false;
             this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
+            // btnPresent
+            // 
+            this.btnPresent.Location = new System.Drawing.Point(363, 24);
+            this.btnPresent.Name = "btnPresent";
+            this.btnPresent.Size = new System.Drawing.Size(144, 64);
+            this.btnPresent.TabIndex = 5;
+            this.btnPresent.Text = "PRESENT";
+            this.btnPresent.UseVisualStyleBackColor = true;
+            this.btnPresent.Click += new System.EventHandler(this.btnPresent_Click);
+            // 
+            // btnBox
+            // 
+            this.btnBox.BackColor = System.Drawing.Color.Red;
+            this.btnBox.Location = new System.Drawing.Point(363, 94);
+            this.btnBox.Name = "btnBox";
+            this.btnBox.Size = new System.Drawing.Size(75, 23);
+            this.btnBox.TabIndex = 6;
+            this.btnBox.UseVisualStyleBackColor = false;
+            this.btnBox.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // btnRibbon
+            // 
+            this.btnRibbon.BackColor = System.Drawing.Color.Yellow;
+            this.btnRibbon.Location = new System.Drawing.Point(363, 121);
+            this.btnRibbon.Name = "btnRibbon";
+            this.btnRibbon.Size = new System.Drawing.Size(75, 23);
+            this.btnRibbon.TabIndex = 7;
+            this.btnRibbon.UseVisualStyleBackColor = false;
+            this.btnRibbon.Click += new System.EventHandler(this.btnColor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRibbon);
+            this.Controls.Add(this.btnBox);
+            this.Controls.Add(this.btnPresent);
             this.Controls.Add(this.btnColor);
             this.Controls.Add(this.lblNext);
             this.Controls.Add(this.buttonCar);
@@ -126,6 +162,9 @@ namespace SantaFactory
         private System.Windows.Forms.Button buttonCar;
         private System.Windows.Forms.Label lblNext;
         private System.Windows.Forms.Button btnColor;
+        private System.Windows.Forms.Button btnPresent;
+        private System.Windows.Forms.Button btnBox;
+        private System.Windows.Forms.Button btnRibbon;
     }
 }
 

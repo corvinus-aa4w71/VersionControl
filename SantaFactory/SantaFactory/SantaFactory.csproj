@@ -58,6 +58,10 @@
     <Compile Include="Entitties\Car.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Entitties\Present.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Entitties\PresentFactory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
