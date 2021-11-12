@@ -17,17 +17,21 @@ namespace SantaFactory
         List<Toy> _toys = new List<Toy>();
 
         private IToyFactory _toyfactory;
+        Toy _nextToy;
 
         public IToyFactory ToyFactory
         {
             get { return _toyfactory; }
-            set { _toyfactory = value; }
+            set { 
+                _toyfactory = value;
+                DisplayNext();
+            }
         }
 
         public Form1()
         {
             InitializeComponent();
-            ToyFactory = new BallFactory();
+            ToyFactory = new CarFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
@@ -57,6 +61,28 @@ namespace SantaFactory
                 _toys.Remove(oldestToy);
                 mainPanel.Controls.Remove(oldestToy);
             }
+        }
+
+        private void buttonBall_Click(object sender, EventArgs e)
+        {
+            ToyFactory = new BallFactory();
+        }
+
+        private void buttonCar_Click(object sender, EventArgs e)
+        {
+            ToyFactory = new CarFactory();
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+            {
+                this.Controls.Remove(_nextToy);
+            }
+            _nextToy = ToyFactory.CreateNew();
+            _nextToy.Left = lblNext.Left + lblNext.Width;
+            _nextToy.Top = lblNext.Top;
+            this.Controls.Add(_nextToy);
         }
     }
 }
