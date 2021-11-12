@@ -84,5 +84,15 @@ namespace SantaFactory
             _nextToy.Top = lblNext.Top;
             this.Controls.Add(_nextToy);
         }
+
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var cd = new ColorDialog();
+            cd.Color = button.BackColor;
+            if (cd.ShowDialog() != DialogResult.OK) return;
+            button.BackColor = cd.Color;
+
+        }
     }
 }
