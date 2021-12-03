@@ -21,10 +21,16 @@ namespace MicroSimulation
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopupalation(@"C:\Temp\nép-teszt.csv");
+
             BirthProbability = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbability = GetDeathProbabilities(@"C:\Temp\halál.csv");
-            for (int year = 2005; year <= 2024; year++)
+            
+        }
+
+        private void StartSimulation(int endyear, string csvPath)
+        {
+            Population = GetPopupalation(csvPath);
+            for (int year = 2005; year <= endyear; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
@@ -35,8 +41,8 @@ namespace MicroSimulation
                                   where x.Gender == Gender.Male && x.IsAlive
                                   select x).Count();
                 int NbrOfFemales = (from x in Population
-                                  where x.Gender == Gender.Female && x.IsAlive
-                                  select x).Count();
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
                 Console.WriteLine(string.Format("Év:{0} \nFiúk:{1} \nLányok:{2}", year, NbrOfMales, NbrOfFemales));
             }
         }
@@ -106,7 +112,7 @@ namespace MicroSimulation
                     var line = sr.ReadLine().Split(';');
                     birthProbability.Add(new BirthProbability()
                     {
-                        Age = int.Parse(line[0]),
+                        Age = byte.Parse(line[0]),
                         NbrOfChildren = int.Parse(line[1]),
                         P = double.Parse(line[2])
                     });
@@ -127,13 +133,18 @@ namespace MicroSimulation
                     deathProbability.Add(new DeathProbability()
                     {
                         Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
-                        Age = int.Parse(line[1]),                        
+                        Age = byte.Parse(line[1]),                        
                         P = double.Parse(line[2])
                     });
                 }
             }
 
             return deathProbability;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            StartSimulation((int)numericUpDown1.Value, txtPath.Text);
         }
     }
 }

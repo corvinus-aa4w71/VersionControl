@@ -8,7 +8,7 @@ namespace MicroSimulation.Entities
 {
     public class DeathProbability
     {
-        public int Age { get; set; }
+        public byte Age { get; set; }
 
         public Gender Gender { get; set; }
 
