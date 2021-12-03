@@ -43,7 +43,7 @@ namespace MicroSimulation
                 int NbrOfFemales = (from x in Population
                                     where x.Gender == Gender.Female && x.IsAlive
                                     select x).Count();
-                Console.WriteLine(string.Format("Év:{0} \nFiúk:{1} \nLányok:{2}", year, NbrOfMales, NbrOfFemales));
+                txtMain.Text += (string.Format("Szimulációs év:{0}\n\tFiúk:{1}\n\tLányok:{2}\n\n", year, NbrOfMales, NbrOfFemales));
             }
         }
 
@@ -145,6 +145,16 @@ namespace MicroSimulation
         private void btnStart_Click(object sender, EventArgs e)
         {
             StartSimulation((int)numericUpDown1.Value, txtPath.Text);
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.FileName = txtPath.Text;
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            txtPath.Text = ofd.FileName;
+            
         }
     }
 }
