@@ -23,7 +23,7 @@ namespace Worlds_Hardest_Game
         public Form1()
         {
             InitializeComponent();
-
+            gc.GameOver += Gc_GameOver;
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
             for (int i = 0; i < populationSize; i++)
@@ -31,6 +31,17 @@ namespace Worlds_Hardest_Game
                 gc.AddPlayer(nbrOfSteps);
             }
             gc.Start();
+        }
+
+        private void Gc_GameOver(object sender)
+        {
+            generation++;
+            lblGen.Text = generation.ToString() + ". Generáció";
+
+            var playerList = from p in gc.GetCurrentPlayers()
+                             orderby p.GetFitness() descending
+                             select p;
+            var topPerformers = playerList.Take(populationSize / 2).ToList();
         }
     }
 }
