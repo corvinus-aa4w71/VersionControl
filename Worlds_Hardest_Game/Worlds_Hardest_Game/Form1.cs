@@ -15,6 +15,7 @@ namespace Worlds_Hardest_Game
     {
         GameController gc = new GameController();
         GameArea ga = null;
+        Brain winnerBrain = null;
 
         int populationSize = 100;
         int nbrOfSteps = 10;
@@ -41,7 +42,39 @@ namespace Worlds_Hardest_Game
             var playerList = from p in gc.GetCurrentPlayers()
                              orderby p.GetFitness() descending
                              select p;
-            var topPerformers = playerList.Take(populationSize / 2).ToList();
+            var topPerformers = playerList.Take(playerList.Count() / 2).ToList();
+
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+            if (winners.Count() > 0)
+            {
+                winnerBrain = winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                return;
+            }
+            gc.ResetCurrentLevel();
+            foreach (var p in topPerformers)
+            {
+                var brain = p.Brain.Clone();
+                if (generation % 3 == 0)
+                {
+                    gc.AddPlayer(brain.ExpandBrain(nbrOfStepsIncrement));
+                }
+                else
+                {
+                    gc.AddPlayer(brain);
+                }
+                if (generation % 3 == 0)
+                {
+                    gc.AddPlayer(brain.Mutate().ExpandBrain(nbrOfStepsIncrement));
+                }
+                else
+                {
+                    gc.AddPlayer(brain.Mutate());
+                }                
+            }
+            gc.Start();
         }
     }
 }
