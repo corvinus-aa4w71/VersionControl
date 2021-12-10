@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worlds_Hardest_Game", "Worlds_Hardest_Game\Worlds_Hardest_Game.csproj", "{AED803A5-4BE3-4779-8A62-11304D404EDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AED803A5-4BE3-4779-8A62-11304D404EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED803A5-4BE3-4779-8A62-11304D404EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED803A5-4BE3-4779-8A62-11304D404EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED803A5-4BE3-4779-8A62-11304D404EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A3A6236-224E-4284-A039-3D76DE209FA3}
+	EndGlobalSection
+EndGlobal
